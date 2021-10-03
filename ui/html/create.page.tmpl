@@ -1,0 +1,28 @@
+{{template "base" .}}
+
+{{define "title"}}Create a New TodoGolang{{end}}
+
+{{define "main"}}
+    <form action='/to-do/create' method='POST'>
+    <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
+    {{with .Form}}
+        <div>
+            <label>Title:</label>
+            {{with .Errors.Get "title"}}
+                <label class='error'>{{.}}</label>
+            {{end}}
+            <input type='text' name='title' value='{{.Get "title"}}'>
+        </div>
+        <div>
+            <label>Description:</label>
+            {{with .Errors.Get "description"}}
+                <label class='error'>{{.}}</label>
+            {{end}}
+            <textarea name='description'>{{.Get "description"}}</textarea>
+        </div>
+        <div>
+            <input type='submit' value='Publish snippet'>
+        </div>
+    {{end}}
+    </form>
+{{end}}
